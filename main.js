@@ -4,8 +4,7 @@ const blockButton = Object.assign(document.createElement("div"), { className: "b
 calculator.classList.add("containerCalculator");
 calculator.append(outputBlock, blockButton);
 
-const buttons = [
-    "C", "←", "%", "÷","7", "8", "9", "*","4", "5", "6", "-","1", "2", "3", "+","±", "0", ".", "=","√", "Х²", "1/X","sin", "cos", "x^y","floor", "ceil", "M+", "M-", "MR", "MC"];
+const buttons = ["C", "←", "%", "÷","7", "8", "9", "*","4", "5", "6", "-","1", "2", "3", "+","±", "0", ".", "=","√", "Х²", "1/X","sin", "cos", "x^y","floor", "ceil", "M+", "M-", "MR", "MC"];
 
 buttons.forEach((label, i) => {
     const btn = Object.assign(document.createElement("button"), { textContent: label, id: `_${i}` });
