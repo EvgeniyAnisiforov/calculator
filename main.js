@@ -4,8 +4,7 @@ const blockButton = Object.assign(document.createElement("div"), { className: "b
 calculator.classList.add("containerCalculator");
 calculator.append(outputBlock, blockButton);
 
-const buttons = [
-    "C", "←", "%", "÷","7", "8", "9", "*","4", "5", "6", "-","1", "2", "3", "+","±", "0", ".", "=","√", "Х²", "1/X","sin", "cos", "x^y","floor", "ceil", "M+", "M-", "MR", "MC"];
+const buttons = ["C", "←", "%", "÷","7", "8", "9", "*","4", "5", "6", "-","1", "2", "3", "+","±", "0", ".", "=","√", "Х²", "1/X","sin", "cos", "x^y","floor", "ceil", "M+", "M-", "MR", "MC"];
 
 buttons.forEach((label, i) => {
     const btn = Object.assign(document.createElement("button"), { textContent: label, id: `_${i}` });
@@ -23,6 +22,13 @@ const handleButtonClick = (value) => {
     if (value === "C") return resetCalculator();
     if (value === "←") return updateOutput(currentValue = currentValue.slice(0, -1) || "0");
     if (value === "±") return updateOutput(currentValue = currentValue.startsWith("-") ? currentValue.slice(1) : `-${currentValue}`);
+    if (value === "√") return performUnaryOperation(Math.sqrt);
+    if (value === "Х²") return performUnaryOperation((n) => Math.pow(n, 2));
+    if (value === "1/X") return performUnaryOperation((n) => (n !== 0 ? 1 / n : "Error"));
+    if (value === "sin") return performUnaryOperation((n) => Math.sin(toRadians(n)));
+    if (value === "cos") return performUnaryOperation((n) => Math.cos(toRadians(n)));
+    if (value === "floor") return performUnaryOperation(Math.floor);
+    if (value === "ceil") return performUnaryOperation(Math.ceil);
     if (["%", "÷", "*", "-", "+"].includes(value)) return handleOperator(value);
     if (value === "x^y") return handleOperator(value);
     if (value === "=") return evaluateResult();
@@ -46,7 +52,7 @@ const calculate = (a, b, op) => {
         case "+": return a + b;
         case "-": return a - b;
         case "*": return a * b;
-        case "÷": return b !== 0 ? a / b : "Ошибка";
+        case "÷": return b !== 0 ? a / b : "Error";
         case "%": return a % b;
         default: return b;
     }
@@ -89,5 +95,14 @@ const resetCalculator = () => {
 const updateOutput = (value) => {
     outputBlock.textContent = value.toString();
 };
+
+
+const performUnaryOperation = (operation) => {
+    const result = roundToPrecision(operation(parseFloat(currentValue)));
+    currentValue = result.toString();
+    updateOutput(currentValue);
+};
+
+const toRadians = (angle) => (angle * Math.PI) / 180;
 
 document.getElementById("root").appendChild(calculator);
