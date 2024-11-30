@@ -52,7 +52,7 @@ const calculate = (a, b, op) => {
         case "+": return a + b;
         case "-": return a - b;
         case "*": return a * b;
-        case "÷": return b !== 0 ? a / b : "Error";
+        case "÷": return b !== 0 ? a / b : "Err";
         case "%": return a % b;
         default: return b;
     }
