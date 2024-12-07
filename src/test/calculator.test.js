@@ -89,3 +89,33 @@ describe("Унарные операции", () => {
     expect(performUnaryOperation(Math.ceil, 3.3)).toBe("4")
   })
 })
+
+// 3. Работа с памятью
+describe("Работа с памятью", () => {
+  let memory = 0
+
+  const addToMemory = (value) => {
+    memory += value
+    return memory
+  }
+  const subtractFromMemory = (value) => {
+    memory -= value
+    return memory
+  }
+  const clearMemory = () => {
+    memory = 0
+    return memory
+  }
+
+  test("Добавить в память", () => {
+    expect(addToMemory(5)).toBe(5)
+  })
+
+  test("Вычесть из памяти", () => {
+    expect(subtractFromMemory(2)).toBe(3)
+  })
+
+  test("Очистить память", () => {
+    expect(clearMemory()).toBe(0)
+  })
+})
