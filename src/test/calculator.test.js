@@ -119,3 +119,54 @@ describe("Работа с памятью", () => {
     expect(clearMemory()).toBe(0)
   })
 })
+
+// 4. Специальные кнопки
+describe("Специальные кнопки", () => {
+  let currentValue
+
+  beforeEach(() => {
+    currentValue = "123" // Инициализируем перед каждым тестом
+  })
+
+  const clear = () => {
+    currentValue = "0"
+  }
+
+  const backspace = () => {
+    currentValue = currentValue.slice(0, -1) || "0"
+  }
+
+  const toggleSign = () => {
+    if (currentValue === "0") return
+    currentValue = currentValue.startsWith("-")
+      ? currentValue.slice(1)
+      : `-${currentValue}`
+  }
+
+  test("Очистить", () => {
+    clear()
+    expect(currentValue).toBe("0")
+  })
+
+  test("Удалить последний символ", () => {
+    backspace()
+    expect(currentValue).toBe("12")
+  })
+
+  test("Удалить последний символ из одной цифры", () => {
+    currentValue = "1"
+    backspace()
+    expect(currentValue).toBe("0")
+  })
+
+  test("Переключить знак", () => {
+    toggleSign()
+    expect(currentValue).toBe("-123")
+  })
+
+  test("Переключить знак для нуля", () => {
+    currentValue = "0"
+    toggleSign()
+    expect(currentValue).toBe("0")
+  })
+})
