@@ -1,4 +1,3 @@
-# .github/workflows/pages-deploy.yml
 name: Pages Deploy
 
 on:
@@ -22,6 +21,8 @@ jobs:
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
+        with:
+          path: . # Указываем, что файлы для деплоя находятся в корневой директории
 
       - name: Deploy to GitHub Pages
         uses: actions/deploy-pages@v1
