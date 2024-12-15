@@ -13,7 +13,15 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Install dependencies
+        run: |
+          npm install # Устанавливаем зависимости проекта
+
       - name: Run tests
         run: |
           npm run test
-         
