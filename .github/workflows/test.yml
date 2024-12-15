@@ -15,5 +15,5 @@ jobs:
 
       - name: Run tests
         run: |
-          echo "Running tests..."
-          # Добавьте здесь команды для запуска ваших тестов
+          npm run test
+         
