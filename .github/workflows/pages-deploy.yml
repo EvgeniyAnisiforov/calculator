@@ -10,12 +10,15 @@ on:
 permissions:
   contents: write
   pages: write
-  id-token: write # Добавляем это разрешение для использования OIDC
+  id-token: write
 
 jobs:
   deploy:
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
+
+    environment: # Указываем среду для деплоя
+      name: github-pages
 
     steps:
       - name: Checkout code
@@ -27,7 +30,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
         with:
-          path: . # Указываем корень проекта, где находится index.html
+          path: . # Указываем путь к артефактам (корень проекта)
 
       - name: Deploy to GitHub Pages
         uses: actions/deploy-pages@v1
