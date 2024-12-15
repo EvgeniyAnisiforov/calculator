@@ -1,0 +1,21 @@
+# .github/workflows/test.yml
+name: Test Workflow
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Run tests
+        run: |
+          echo "Running tests..."
+          # Добавьте здесь команды для запуска ваших тестов
+          exit 0
