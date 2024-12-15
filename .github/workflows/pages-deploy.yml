@@ -7,6 +7,11 @@ on:
     types:
       - completed
 
+permissions:
+  contents: write
+  pages: write
+  id-token: write # Добавляем это разрешение для использования OIDC
+
 jobs:
   deploy:
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
@@ -22,7 +27,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
         with:
-          path: . # Указываем, что файлы для деплоя находятся в корневой директории
+          path: . # Указываем корень проекта, где находится index.html
 
       - name: Deploy to GitHub Pages
         uses: actions/deploy-pages@v1
