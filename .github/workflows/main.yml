@@ -1,10 +1,9 @@
-# .github/workflows/test.yml
 name: Test Workflow
 
 on:
   push:
     branches:
-      - main
+      - '**'
 
 jobs:
   test:
@@ -18,4 +17,3 @@ jobs:
         run: |
           echo "Running tests..."
           # Добавьте здесь команды для запуска ваших тестов
-          exit 0
